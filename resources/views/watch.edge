@@ -1,0 +1,50 @@
+@layout('layouts.main')
+
+@section('title')
+  BestFlix
+@endsection
+
+@section('content')
+    <div class="container">
+            <video id="myVideo" preload="none" controls crossorigin playsinline poster="{{ assetsUrl('upload/movies/poster/'+filme.moviePoster) }}" id="player">
+                <!-- Video files -->
+                <source src="{{ assetsUrl('uploads/movies/'+filme.movieFile) }}" type="video/mp4" size="720">
+            </video>
+    </div>
+
+    <div class="container">
+        <div class="row">
+            <div class="col">
+                <div class="others">
+                    @each(others in others)
+                        <h1 style="color: white; font-size: 1.2em;" class="text-uppercase">{{ others.title }}</h1>
+                        <p class="sinopse">{{ others.sinopse }}</p>
+                        <div class="container">
+                            <div class="row rates">
+                                @if(others.likes === null)
+                                <p class="likeBtn"><i class="fas fa-heart"></i> 0</p>
+                                @else 
+                                <p class="likeBtn"><i class="fas fa-heart"></i> {{ others.likes }}</p>
+                                @endif
+                            </div>
+                        </div>
+                        <hr style="border: 1px solid white; opacity: 0.1;">
+                    @endeach
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script type="text/javascript">
+        $(window).ready(() => {
+            player.play()
+        })
+
+        var filmeId = {{ filme.id }}
+        $('.likeBtn').click(() => {
+             $.get('/like/'+filmeId)
+        })
+    </script>
+
+    
+@endsection

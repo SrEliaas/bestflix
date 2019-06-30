@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+    <meta name="description" content="Assista filmes sem precisar pesquisar.">
+    <meta name="robots" content="index, follow">
+    <meta name="keywords" content="filmes, franquia, disney, marvel, dc">
+    <meta name="author" content="SrEliaas =)">
+
+    <title>
+        @!section('title')
+    </title>
+
+    <!-- FONTAWESOME -->
+    <script src="https://kit.fontawesome.com/15e0b2f1e3.js"></script>
+
+    <!-- JQUERY -->
+    <script src="https://code.jquery.com/jquery-3.4.1.js"></script>
+    
+
+    {{--  BOOTSTRAP 4  --}}
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+
+    <!-- SWIPER -->
+    <link rel="stylesheet" href="/assets/swiper.min.css">
+
+    {{--  VIDEO PLAYER  --}}
+    <link rel="stylesheet" href="https://cdn.plyr.io/3.5.6/plyr.css" />
+
+    <!-- CSS -->
+    <link rel="stylesheet" href="/assets/style.css">
+
+</head>
+<body>
+    <header class="nav">
+        <div class="container">
+            <div class="row">
+                <div class="col">
+                    <a href="/" class="logo"><img src="/assets/img/LOGO.png" width="120"></a>
+                </div>
+                <div class="col text-right">
+                    {{--  USER LOGGED  --}}
+                    @loggedIn
+                        <img src="/assets/img/perfis/thanos.jpg" class="dropdown toggle" data-toggle="dropdown" width="50" height="50" style="border-radius: 50%; text-align: right; cursor: pointer;">
+                        <div class="dropdown-menu">
+                            <a href="/perfil" class="dropdown-item">PERFIL</a>
+                            <hr>
+                            <a href="/logout" class="dropdown-item">SAIR &nbsp; <i class="fas fa-user-minus"></i></a>
+                        </div>
+                    @else
+                        <button class="loginBtn dropdown toggle" data-toggle="dropdown"><i class="fas fa-user"></i></button>
+                        <div class="dropdown-menu">
+                            <a href="#" class="dropdown-item" data-toggle="modal" data-target="#loginModal">ENTRAR &nbsp; <i class="fas fa-user-check"></i></a>
+                            <hr>
+                            <a href="#" class="dropdown-item" data-toggle="modal" data-target="#exampleModal">REGISTRAR &nbsp; <i class="fas fa-user-plus"></i></a>
+                        </div>
+                    @endloggedIn
+                </div>
+            </div>
+        </div>
+
+    </header>
+
+            {{--  MODAL - REGISTER  --}}
+            <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content" style="background-color: rgba(0, 0, 0, 0.7)">
+                <div class="modal-header">
+                    <h5 class="modal-title text-white" id="exampleModalLabel">Criar conta</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Fechar">
+                    <span aria-hidden="true" class="text-white">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    @if(flashMessage('registerError'))
+                        <div class="alert alert-danger" role="alert">
+                          <h5>{{ flashMessage('registerError') }}</h5>
+                        </div>
+                      @endif
+                    <form action="{{ route('UserController.create') }}" method="POST">
+                        {{ csrfField() }}
+                        <div class="form-group">
+                            <label for="recipient-email" class="col-form-label text-white">Email:</label>
+                            @if(hasErrorFor('email'))
+                              <div class="alert alert-danger" role="alert">
+                                  {{ getErrorFor('email') }}
+                              </div>
+                            @endif
+                            <input type="email" name="email" class="form-control" id="recipient-email">
+                        </div>
+                        <div class="form-group">
+                                <label for="recipient-username" class="col-form-label text-white">Seu nome:</label>
+                                @if(hasErrorFor('username'))
+                                  <div class="alert alert-danger" role="alert">
+                                      {{ getErrorFor('username') }}
+                                  </div>
+                                @endif
+                                <input type="text" name="username" class="form-control" id="recipient-username">
+                        </div>
+                        <div class="form-group">
+                                @if(hasErrorFor('password'))
+                                <div class="alert alert-danger" role="alert">
+                                    {{ getErrorFor('password') }}
+                                </div>
+                              @endif
+                            <label for="recipient-password" class="col-form-label text-white">Senha:</label>
+                            <input type="password" name="password" class="form-control" id="recipient-password">
+                        </div>
+                        <div class="form-group">
+                            <label for="recipient-password" class="col-form-label text-white">Repetir senha:</label>
+                            <input type="password" name="c-password" class="form-control" id="recipient-password">
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button>
+                            <button type="submit" class="btn btn-primary">Registrar</button>
+                        </div>
+                    </form>
+                </div>
+                </div>
+            </div>
+            </div>
+
+            {{--  MODAL - LOGIN  --}}
+            <div class="modal fade" id="loginModal" tabindex="-1" role="dialog" aria-labelledby="loginModalLabel" aria-hidden="true">
+                <div class="modal-dialog" role="document">
+                        <div class="modal-content" style="background-color: rgba(0, 0, 0, 0.7)">
+                        <div class="modal-header">
+                            <h5 class="modal-title text-white" id="loginModalLabel">Entrar na conta</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Fechar">
+                            <span aria-hidden="true" class="text-white">&times;</span>
+                            </button>
+                        </div>
+                        <div class="modal-body">
+                            @if(flashMessage('loginError'))
+                                <div class="alert alert-danger" role="alert">
+                                  <h5>{{ flashMessage('loginError') }}</h5>
+                                </div>
+                              @endif
+                            <form action="{{ route('UserController.login') }}" method="POST">
+                                {{ csrfField() }}
+                                <div class="form-group">
+                                    <label for="login-email" class="col-form-label text-white">Email:</label>
+                                    @if(hasErrorFor('email'))
+                                      <div class="alert alert-danger" role="alert">
+                                          {{ getErrorFor('email') }}
+                                      </div>
+                                    @endif
+                                    <input type="email" name="email" class="form-control" id="login-email">
+                                </div>
+                                <div class="form-group">
+                                        @if(hasErrorFor('password'))
+                                        <div class="alert alert-danger" role="alert">
+                                            {{ getErrorFor('password') }}
+                                        </div>
+                                      @endif
+                                    <label for="login-password" class="col-form-label text-white">Senha:</label>
+                                    <input type="password" name="password" class="form-control" id="login-password">
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button>
+                                    <button type="submit" class="btn btn-primary">Entrar</button>
+                                </div>
+                            </form>
+                        </div>
+                        </div>
+            </div>
+            </div>
+
+    <div class="pt-5" style="margin-top: 50px;">
+        @!section('content')
+    </div>
+
+    <script type="text/javascript">
+        $(window).scroll(() => {
+            $('.nav').css('background-color', 'rgba(0,0,0,0.3)')
+        }) 
+    </script>
+
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
+<script src="https://cdn.plyr.io/3.5.6/plyr.polyfilled.js"></script>
+
+
+<script>
+    // Change the second argument to your options:
+// https://github.com/sampotts/plyr/#options
+const player = new Plyr('video', {controls: ['play', 'restart', 'current-time', 'progress', 'mute', 'volume', 'pip', 'settings', 'fullscreen']});
+player.source = {
+    type: 'video'
+}
+// Expose player so it can be used from the console
+window.player = player;
+</script>
+
+
+<script>
+
+    $(window).ready(() => {
+        console.log('Este é um recurso de navegador voltado para desenvolvedores. Se alguém disse para você copiar e colar algo aqui para ativar um recurso ou "invadir" a conta de outra pessoa, isso é uma fraude e você dará a ele acesso à sua conta.')
+    })
+
+</script>
+</body>
+</html>

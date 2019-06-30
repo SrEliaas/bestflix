@@ -1,0 +1,46 @@
+@layout('layouts.main')
+
+@section('title')
+  BestFlix
+@endsection
+
+<!-- MOVIEs PART -->
+<!-- Swiper -->
+@section('content')
+     <div class="swiper-container">
+         <div class="swiper-wrapper">
+                @each(filmes in filmes)      
+                <div class="swiper-slide" style="background-image: url({{ assetsUrl('upload/movies/poster/'+filmes.moviePoster) }}); box-shadow:inset 0 0 0 2000px rgba(0,0,0,0.8);">
+                    <h1 class="iconPlay"><a href="/watch/{{filmes.slug}}"><i class="fa fa-play"></i></a></h1>
+                    <div class="info pt-5 pl-3">
+                        <h4 class="text-uppercase"><a href="/watch/{{filmes.slug}}"> {{ filmes.title }} </a></h4>
+                        <p class="sinopse">{{ filmes.sinopse }}</p>
+                        <p class="release"><i class="fas fa-calendar-check"></i> &nbsp; {{ filmes.release }}</p>
+                        <p class="release"><i class="fas fa-clock"></i> &nbsp; {{ filmes.duration }} MIN</p>
+                        <br>
+                    </div>
+                </div>
+                @endeach
+            </div>
+        </div>
+
+        <script type="text/javascript" src="assets/js/swiper.min.js"></script>
+        <script>
+                var swiper = new Swiper('.swiper-container', {
+                    effect: 'coverflow',
+                    grabCursor: true,
+                    centeredSlides: true,
+                    slidesPerView: 'auto',
+                    coverflowEffect: {
+                        rotate: 20,
+                        stretch: 0,
+                        depth: 90,
+                        modifier: 1,
+                        slideShadows : true,
+                    },
+                    pagination: {
+                        el: '.swiper-pagination',
+                    },
+                });
+        </script>
+@endsection

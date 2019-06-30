@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+    <title>
+        @!section('title')
+    </title>
+
+    <!-- Bootstrap CSS CDN -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css" integrity="sha384-9gVQ4dYFwwWSjIDZnLEWnxCjeSWFphJiwGPXr1jddIhOegiu1FwO5qRGvFXOdJZ4" crossorigin="anonymous">
+
+    <!-- Our Custom CSS -->
+    <link rel="stylesheet" href="/assets/admin.css">
+
+   <!-- FONTAWESOME -->
+   <script src="https://kit.fontawesome.com/15e0b2f1e3.js"></script>
+
+   <!-- JQUERY -->
+   <script src="https://code.jquery.com/jquery-3.4.1.js"></script>
+
+</head>
+
+<body>
+
+    <div class="wrapper">
+        <header class="nav">
+            <div class="container">
+                <div class="row">
+                    <div class="col">
+                        <a href="/admin"><img src="/assets/img/LOGO.png" alt="BestFlix - O melhor dos filmes." class="logo"></a>
+                    </div>
+                    <div class="col">
+                        <h4 class="menuBtn"><i class="fa fa-bars"></i></h4>
+                        <h4 class="menuClose text-right"><i class="fa fa-times"></i></h4>
+                    </div>
+                </div>
+            </div>
+        </header>
+
+        <div class="sidebar">
+            <div class="container">
+                <div class="sidebar-item text-center pt-5">
+                    <div class="col">
+                        <img src="/assets/img/perfis/thanos.jpg" class="pic">
+                        <h5 class="name text-uppercase pt-4">SR.ELIAAS</h5>
+                        <p class="userType text-uppercase">ADMINISTRADOR</p>
+                        <br>
+                        <hr style="border: 1px solid #3d4465; opacity: 0.5;">
+                        <p class="text-left" style="color: grey; opacity: 0.7; font-size: 0.9em;">NAVEGAÇÃO</p>
+                        <br>
+                        <div class="navigation text-left">
+                            <li><a href="/admin"><i class="fas fa-desktop"></i> &nbsp; DASHBOARD</a></li>
+                            <li><a href="/upload"><i class="fas fa-upload"></i> &nbsp; UPLOAD</a></li>
+                            <li><a href="#"><i class="fas fa-paint-brush"></i> &nbsp; THEME</a></li>
+                        </div>
+                        <br>
+                        <hr style="border: 1px solid #3d4465; opacity: 0.5;">
+                        <p class="text-left" style="color: grey; opacity: 0.7; font-size: 0.9em;">VOLTAR</p>
+                        <a href="/" class="btn_1">ÍNICIO</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <section class="content pt-5">
+       <div class="container">
+           @!section('content')
+       </div>
+    </section>
+
+   <!-- JQUERY -->
+   <script src="https://code.jquery.com/jquery-3.4.1.js"></script>
+    <!-- Popper.JS -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.0/umd/popper.min.js" integrity="sha384-cs/chFZiN24E4KMATLdqdvsezGxaGsi4hLGOzlXwp5UZB1LY//20VyM2taTB4QvJ" crossorigin="anonymous"></script>
+    <!-- Bootstrap JS -->
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js" integrity="sha384-uefMccjFJAIv6A+rW+L4AHf99KvxDjWSu1z9VI8SKNVmz4sk7buKt/6v9KI65qnm" crossorigin="anonymous"></script>
+
+    {{--  JAVASCRIPT  --}}
+    <script>
+        var is_mobile = window.matchMedia('only screen and (max-width: 760px)').matches
+        if (is_mobile) {
+            $('.menuBtn').click(() => {
+                $('.sidebar').slideToggle(1000)
+                $('.menuBtn').fadeOut(90)
+                $('.menuClose').fadeIn(1000)
+            })
+
+            $('.menuClose').click(() => {
+                $('.sidebar').slideUp(1000)
+                $('.menuClose').css('display', 'none')
+                $('.menuBtn').fadeIn(1000)
+            })
+        }
+
+        var is_desktop = window.matchMedia('only screen and (min-width: 1280px)').matches
+        if (is_desktop) {
+            $('.menuBtn').css('display', 'none')
+            $('.menuClose').css('display', 'block')
+
+            $('.menuBtn').click(() => {
+                $('.sidebar').slideToggle(1000)
+                $('.menuBtn').fadeOut(90)
+                $('.menuClose').fadeIn(1000)
+            })
+
+            $('.menuClose').click(() => {
+                $('.sidebar').slideUp(1000)
+                $('.menuClose').css('display', 'none')
+                $('.menuBtn').fadeIn(1000)
+            })
+        }
+    </script>
+
+</body>
+
+</html>

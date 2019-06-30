@@ -1,0 +1,274 @@
+@import url('https://fonts.googleapis.com/css?family=Poppins:400,400i,500,500i,600,600i,700,700i&display=swap');
+
+* {
+    margin: 0;
+    padding: 0;
+    font-size: 100%;
+    box-sizing: border-box;
+    border: 0;
+    font-family: 'Poppins', sans-serif;
+}
+
+html, body {
+    position: relative;
+    height: 100%;
+  }
+
+body {
+    background-image: url('img/bodyBg.png');
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-color: #2F394F;
+}
+
+a {
+    text-decoration: none;
+    color: white;
+}
+
+a:hover {
+    color: #5F1C8D;
+    text-decoration: none;
+}
+
+ul {
+    list-style: none;
+}
+
+img {
+    max-width: 100%;
+}
+
+.btn_1 {
+    color: white;
+    background-color: #3d4465;
+    border: none;
+    border-radius: 3px;
+    padding: 10px 30px;
+    cursor: pointer;
+    font-weight: 600;
+}
+
+.btn_1:hover {
+    text-decoration: none;
+    color: white;
+}
+
+
+.plyr--full-ui input[type=range] {
+    color: #5C629D;
+  }
+  
+  .plyr__control--overlaid {
+    background: rgba(#5C629D, .8);
+  }
+  
+  .plyr--video .plyr__control.plyr__tab-focus,
+  .plyr--video .plyr__control:hover,
+  .plyr--video .plyr__control[aria-expanded=true] {
+    background: #5C629D;
+  }
+  
+  .plyr__control.plyr__tab-focus {
+    box-shadow: 0 0 0 5px rgba(#5C629D, .5);
+  }
+  
+  .plyr__menu__container .plyr__control[role=menuitemradio][aria-checked=true]::before {
+    background: #5C629D;
+  }
+
+/* RESET END */
+
+/* SWIPER.JS START */
+.swiper-container {
+    width: 100%;
+    padding-top: 50px;
+    padding-bottom: 50px;
+    top: 10%;
+  }
+  .swiper-slide {
+    background-position: center;
+    background-size: cover;
+    background-repeat: no-repeat;
+    text-align: left;
+    width: 60%;
+    height: 70%;
+  }
+
+  .sinopse {
+      color: white;
+      opacity: 0.5;
+  }
+
+  .release {
+    color: white;
+    opacity: 0.7;
+  }
+
+  .swiper-slide .iconPlay {
+      margin-bottom: 10%;
+      text-align: center;
+      margin-top: 10%;
+      font-size: 8em;
+  }
+
+  @media screen and (max-width: 480px) {
+    .swiper-container {
+        width: 100%;
+        padding-top: 50px;
+        padding-bottom: 50px;
+        top: 0;
+      }
+
+      .swiper-slide {
+        background-position: center;
+        background-size: cover;
+        width: 90%;
+        height: 90%;
+      }
+  }
+  /* SWIPER.JS END */
+
+/* NAVBAR */
+.nav 
+{
+    top: 0;
+    width: 100%;
+    color: #fff;
+    float: left;
+    background: transparent;
+    padding: 4% 4%;
+    z-index: 9;
+    position: fixed;
+}
+
+.logo 
+{   
+    float: left;
+}
+.searchBtn {
+    float: right;
+    font-size: 1.3em;
+    background: transparent;
+    color: white;
+}
+.loginBtn {
+    border: none;
+    background: transparent;
+    cursor: pointer;
+}
+.loginBtn i {
+    color: white;
+    font-size: 1.8em;
+}
+
+
+/* MOVIES PART */
+.movies {
+    width: 100%;
+    height: 100%;
+    top: 0;
+    position: absolute;
+}
+
+.movieHover {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: rgba(0, 0, 0, 0.8)
+}
+
+.movieHover h1 {
+    color: #5C629D;
+    font-size: 2em;
+}
+
+
+/* WATCH MOVIES PART */
+.others {
+    background-color: rgba(0, 0, 0, 0.6);
+    padding: 15px;
+}
+
+.movieTitle {
+    color: white;
+    font-size: 1.2em;
+}
+
+.movieSp {
+    font-size: 1.1em;
+    color: rgb(185, 185, 185);
+    opacity: 0.7;
+}
+
+/* rates */
+.rates p {
+    margin: 0 10px;
+    color: white;
+    opacity: 0.5;
+}
+
+.rates p:hover {
+    color: rgb(221, 37, 83);
+    cursor: pointer;
+}
+
+.ratesIndex p {
+    margin: 0 10px;
+    color: white;
+    font-size: 1.2em;
+    opacity: 0.5;
+}
+
+.ratesIndex p:hover {
+    color: rgb(221, 37, 83);
+    cursor: pointer;
+}
+
+.categories .card{
+    background-color: rgba(0, 0, 0, 0.6);
+    color: white;
+}
+
+.categories .card-title {
+    font-size: 1.5em;
+}
+
+.perfil .card {
+    background-color: rgba(0, 0, 0, 0.6);
+    padding: 3%;
+    color: white;
+}
+
+
+.profile_pic {
+    border-radius: 10px;
+}
+
+/* ==== BREAKPOINTS ==== */
+/* SMALL DEVICES */
+@media screen and (min-width: 480px) {
+
+}
+
+@media screen and (max-height: 411px) {
+    .swiper-slide {
+        background-position: center;
+        background-size: cover;
+        width: 90%;
+        height: 90%;
+      }
+}
+
+/* DESKTOPS */
+@media screen and (min-width: 1280px) {
+    .nav {
+        padding: 1% 4%;
+    }
+
+    .swiper-slide .title {
+        font-size: 2.5em;
+    }
+}

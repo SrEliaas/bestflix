@@ -1,0 +1,74 @@
+@layout('layouts.admin')
+
+@section('title')
+  BestFlix - UPLOAD
+@endsection
+
+@section('content')
+    <section class="upload">
+        <div class="card mx-auto">
+            <div class="card-body">
+                @if(flashMessage('uploadError'))
+                <div class="alert alert-danger" role="alert">
+                    {{ flashMessage('uploadError') }}
+                </div>
+                @endif
+                <form action="{{ route('FilmeController.create') }}" method="POST" enctype="multipart/form-data">
+                    {{ csrfField() }}
+
+                    <div class="form-group">
+                      <label for="title">Title</label>
+                      <input type="text" name="title" class="form-control" id="title" placeholder="Enter the movie title">
+                      {{ elIf('<p>$self</p>', getErrorFor('title'), hasErrorFor('title')) }}
+                    </div>
+                    <div class="form-group">
+                      <label for="sinopse">Sinopse</label>
+                      <br>
+                      <textarea class="form-control" name="sinopse" id="sinopse" placeholder="Enter the sinopse here" rows="10" aria-describedby="sinopseHelp"></textarea>
+                      {{ elIf('<p>$self</p>', getErrorFor('sinopse'), hasErrorFor('sinopse')) }}
+                      <small id="sinopseHelp" class="form-text text-muted">Put a little sinopse.</small>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="slub">Slub</label>
+                        <input type="text" name="slub" class="form-control" id="slub" placeholder="Enter the slub">
+                        {{ elIf('<p>$self</p>', getErrorFor('slub'), hasErrorFor('slub')) }}
+                        <small class="form-text text-muted">To identify the movies &nbsp; <span style="font-size: 1.5em;" data-toggle="tooltip" data-placement="right" title="Caso o filme tiver continuidade é pelo slub que iremos identificar."><i class="fas fa-question"></i></span></small>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="slug">Slug</label>
+                        <input type="text" name="slug" class="form-control" id="slug" placeholder="Enter the slug">
+                        {{ elIf('<p>$self</p>', getErrorFor('slug'), hasErrorFor('slug')) }}
+                        <small id="slug" class="form-text text-muted">Example: <span style="opacity: 0.6;">http://www.bestflix.com/watch/</span><b>capitao-america-primeiro-vingador</b></small>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="release">Lançamento</label>
+                        <input type="text" name="release" class="form-control" id="release" placeholder="Enter the date release">
+                        {{ elIf('<p>$self</p>', getErrorFor('release'), hasErrorFor('release')) }}
+                    </div>
+
+                    <div class="form-group">
+                        <label for="duration">Duração (MINUTOS)</label>
+                        <input type="number" min="0" name="duration" class="form-control" id="duration" placeholder="Enter all minutes of the movie">
+                        {{ elIf('<p>$self</p>', getErrorFor('duration'), hasErrorFor('duration')) }}
+                    </div>
+                    <br>
+                    <hr style="border: 1px solid #232323;">
+                    <br>
+                    <div class="form-group">
+                        <label for="movieFile">Movie File(MP4)</label>
+                        <input type="file" name="movieFile" class="form-control">
+                    </div>
+                    <br>
+                    <div class="form-group">
+                        <label for="moviePoster">Movie Poster(JPG, JPEG)</label>
+                        <input type="file" name="moviePoster" class="form-control">
+                    </div>
+                    <button type="submit" class="btn_1"> ENVIAR </button>
+                </form>
+            </div>
+        </div>
+    </section>
+@endsection
